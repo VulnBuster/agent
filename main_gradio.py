@@ -6,8 +6,8 @@ from textwrap import dedent
 from agno.agent import Agent
 from agno.tools.mcp import MCPTools
 from agno.models.nebius import Nebius
-from mcp import ClientSession
-from mcp.client.streamable_http import streamablehttp_client
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
 from dotenv import load_dotenv
 import base64
 import difflib
@@ -18,6 +18,30 @@ load_dotenv()
 api_key = os.getenv("NEBIUS_API_KEY")
 if not api_key:
     raise ValueError("NEBIUS_API_KEY not found in .env file")
+
+# Конфигурация MCP серверов
+MCP_SERVERS = {
+    "bandit": {
+        "url": "http://localhost:7860/gradio_api/mcp/sse",
+        "description": "Python code security analysis"
+    },
+    "detect_secrets": {
+        "url": "http://localhost:7861/gradio_api/mcp/sse",
+        "description": "Secret detection in code"
+    },
+    "pip_audit": {
+        "url": "http://localhost:7862/gradio_api/mcp/sse",
+        "description": "Python package vulnerability scanning"
+    },
+    "circle_test": {
+        "url": "http://localhost:7863/gradio_api/mcp/sse",
+        "description": "Security policy compliance checking"
+    },
+    "semgrep": {
+        "url": "http://localhost:7864/gradio_api/mcp/sse",
+        "description": "Advanced static code analysis"
+    }
+}
 
 def generate_simple_diff(original_content: str, updated_content: str, file_path: str) -> str:
     """
@@ -38,29 +62,40 @@ def generate_simple_diff(original_content: str, updated_content: str, file_path:
     stats = f"\n📊 Changes: +{added_lines} additions, -{removed_lines} deletions"
     return diff_content + stats
 
-async def run_bandit_agent(message):
+async def run_mcp_agent(message, server_name):
+    """Запускает агента для конкретного MCP сервера"""
     if not api_key:
         return "Error: Nebius API key not found in .env file"
     
+    if server_name not in MCP_SERVERS:
+        return f"Error: Unknown MCP server {server_name}"
+    
     try:
-        # Используем HTTP транспорт вместо stdio
-        async with streamablehttp_client("http://localhost:7860/mcp") as (read, write, _):
+        server_params = StdioServerParameters(
+            command="npx",
+            args=[
+                "-y",
+                "mcp-remote",
+                MCP_SERVERS[server_name]["url"],
+                "--transport",
+                "sse-only"
+            ],
+            env={}
+        )
+        
+        async with stdio_client(server_params) as (read, write):
             async with ClientSession(read, write) as session:
-                # Инициализируем сессию с правильными параметрами
-                await session.initialize()
-                
                 mcp_tools = MCPTools(session=session)
                 await mcp_tools.initialize()
                 
                 agent = Agent(
                     tools=[mcp_tools],
                     instructions=dedent("""\
-                        You are an intelligent, universal security assistant with access to multiple MCP tools (e.g., bandit_scan, bandit_profile_scan, detect_secrets_scan, etc.).
+                        You are an intelligent security assistant with access to MCP tools.
                         - Automatically select and invoke the appropriate tool(s) based on the user's request.
-                        - Always choose the highest intensity settings available (e.g., severity_level: high, confidence_level: high) for the most thorough analysis.
-                        - If the user specifies particular checks or tools (e.g., SQL injection, shell injection), focus on those; otherwise, perform a comprehensive vulnerability scan of the uploaded file.
-                        - Support code in any language by using the corresponding MCP tool for that language.
-                        - Call MCP tools using JSON-RPC over stdio and return results in markdown-friendly format.
+                        - Always choose the highest intensity settings available.
+                        - If the user specifies particular checks, focus on those.
+                        - Return results in markdown-friendly format.
                     """),
                     markdown=True,
                     show_tool_calls=True,
@@ -74,9 +109,10 @@ async def run_bandit_agent(message):
                 return response.content
                 
     except Exception as e:
-        return f"Error: {str(e)}"
+        return f"Error running {server_name} MCP: {str(e)}"
 
 async def run_fix_agent(message):
+    """Запускает агента для исправления кода"""
     if not api_key:
         return "Error: Nebius API key not found in .env file"
     
@@ -100,7 +136,8 @@ async def run_fix_agent(message):
     except Exception as e:
         return f"Error proposing fixes: {e}"
 
-async def process_file(file_obj, custom_checks):
+async def process_file(file_obj, custom_checks, selected_servers):
+    """Обрабатывает файл с помощью выбранных MCP серверов"""
     if not file_obj:
         return "", ""
     
@@ -116,20 +153,22 @@ async def process_file(file_obj, custom_checks):
         with open(file_path, "w", encoding='utf-8') as f:
             f.write(file_content)
         
-        # Подготавливаем промпт для анализа безопасности
-        if custom_checks:
-            user_message = (
-                f"Please analyze the file at path '{file_path}' for {custom_checks}, "
-                f"using the most comprehensive settings available."
-            )
-        else:
-            user_message = (
-                f"Please perform a full vulnerability and security analysis on the file at path '{file_path}', "
-                f"selecting the highest intensity settings."
-            )
-        
-        # Запускаем анализ безопасности напрямую
-        await run_bandit_agent(user_message)
+        # Запускаем анализ на всех выбранных серверах
+        results = []
+        for server in selected_servers:
+            if custom_checks:
+                user_message = (
+                    f"Please analyze the file at path '{file_path}' for {custom_checks}, "
+                    f"using the most comprehensive settings available."
+                )
+            else:
+                user_message = (
+                    f"Please perform a full vulnerability and security analysis on the file at path '{file_path}', "
+                    f"selecting the highest intensity settings."
+                )
+            
+            result = await run_mcp_agent(user_message, server)
+            results.append(f"## {server.upper()} Analysis\n{result}")
         
         # Читаем оригинальный код
         with open(file_path, 'r', encoding='utf-8') as f_in:
@@ -152,10 +191,13 @@ Please generate a corrected version of this code, addressing all security vulner
         # Генерируем diff
         diff_text = generate_simple_diff(orig_code, cleaned_code, orig_name)
         
-        return diff_text, cleaned_code
+        # Объединяем результаты анализа
+        analysis_results = "\n\n".join(results)
+        
+        return analysis_results, diff_text, cleaned_code
         
     except Exception as e:
-        return f"An error occurred: {str(e)}", ""
+        return f"An error occurred: {str(e)}", "", ""
 
 # Создаем интерфейс Gradio
 with gr.Blocks(title="Security Tools MCP Agent") as demo:
@@ -171,10 +213,16 @@ with gr.Blocks(title="Security Tools MCP Agent") as demo:
                 label="Enter specific checks or tools to use (optional)",
                 placeholder="e.g., SQL injection, shell injection, detect secrets"
             )
+            server_checkboxes = gr.CheckboxGroup(
+                choices=list(MCP_SERVERS.keys()),
+                value=list(MCP_SERVERS.keys()),
+                label="Select MCP Servers"
+            )
             scan_button = gr.Button("Run Scan", variant="primary")
     
     with gr.Row():
         with gr.Column(scale=1):
+            analysis_output = gr.Markdown(label="Security Analysis Results")
             diff_output = gr.Textbox(label="Proposed Code Fixes", lines=10)
             fixed_code_output = gr.Code(label="Fixed Code", language="python")
             download_button = gr.File(label="Download corrected file")
@@ -190,8 +238,8 @@ with gr.Blocks(title="Security Tools MCP Agent") as demo:
     
     scan_button.click(
         fn=process_file,
-        inputs=[file_input, custom_checks],
-        outputs=[diff_output, fixed_code_output]
+        inputs=[file_input, custom_checks, server_checkboxes],
+        outputs=[analysis_output, diff_output, fixed_code_output]
     ).then(
         fn=update_download_button,
         inputs=[fixed_code_output],
