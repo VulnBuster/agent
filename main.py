@@ -109,7 +109,7 @@ async def run_bandit_agent(message):
                                 show_tool_calls=True,
                                 model=Nebius(
                                     id="Qwen/Qwen3-30B-A3B-fast",
-                                    api_key="..."
+                                    api_key=os.environ["NEBIUS_API_KEY"]
                                 )
                             )
                             
