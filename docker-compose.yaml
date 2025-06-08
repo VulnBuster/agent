@@ -24,11 +24,6 @@ services:
     networks:
       - mcp-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7860/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   # Bandit MCP Server
   mcp-bandit:
@@ -40,11 +35,6 @@ services:
     networks:
       - mcp-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7861/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   # Detect-Secrets MCP Server
   mcp-detect-secrets:
@@ -56,11 +46,6 @@ services:
     networks:
       - mcp-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7862/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   # Pip-Audit MCP Server
   mcp-pip-audit:
@@ -72,11 +57,6 @@ services:
     networks:
       - mcp-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7863/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   # Circle-Test MCP Server
   mcp-circle-test:
@@ -90,11 +70,6 @@ services:
     networks:
       - mcp-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7864/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   # Semgrep MCP Server
   mcp-semgrep:
@@ -106,11 +81,6 @@ services:
     networks:
       - mcp-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7865/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
 networks:
   mcp-network:
