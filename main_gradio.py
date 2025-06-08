@@ -15,6 +15,7 @@ import re
 import aiohttp
 import logging
 
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -25,6 +26,8 @@ load_dotenv()
 api_key = os.getenv("NEBIUS_API_KEY")
 if not api_key:
     raise ValueError("NEBIUS_API_KEY not found in .env file")
+
+
 MCP_SERVERS = {
     "bandit": {
         "url": "http://localhost:7860/gradio_api/mcp/sse",
@@ -47,6 +50,8 @@ MCP_SERVERS = {
         "description": "Advanced static code analysis"
     }
 }
+
+
 
 def generate_simple_diff(original_content: str, updated_content: str, file_path: str) -> str:
     diff_lines = list(difflib.unified_diff(
@@ -71,7 +76,9 @@ async def run_mcp_agent(message, server_name):
     if server_name not in MCP_SERVERS:
         return f"Error: Unknown MCP server {server_name}"
     
-    max_connection_attempts = 3
+
+    
+    max_connection_attempts = 2  # decrease attempts for faster response
     
     for attempt in range(max_connection_attempts):
         try:
@@ -91,16 +98,16 @@ async def run_mcp_agent(message, server_name):
             )
             
             try:
-                async with asyncio.timeout(60):
+                async with asyncio.timeout(30):  # Уменьшен с 60 до 30 секунд
                     async with stdio_client(server_params) as (read, write):
                         async with ClientSession(read, write) as session:
-                            await asyncio.sleep(2)
+                            await asyncio.sleep(1)  # Уменьшен с 2 до 1 секунды
                             
                             logger.info(f"Starting MCP session for {server_name}")
                             
                             mcp_tools = MCPTools(session=session)
                             try:
-                                async with asyncio.timeout(30):
+                                async with asyncio.timeout(15):  # decrease timeout for faster response
                                     await mcp_tools.initialize()
                                 logger.info(f"MCP tools initialized successfully for {server_name}")
                             except asyncio.TimeoutError:
@@ -242,7 +249,7 @@ Show complete results and explain each finding clearly with priority levels."""
                             )
                             
                             try:
-                                async with asyncio.timeout(120):
+                                async with asyncio.timeout(60):  # Уменьшен с 120 до 60 секунд
                                     response = await agent.arun(message)
                                 return response.content
                             except asyncio.TimeoutError:
@@ -543,7 +550,7 @@ with gr.Blocks(title="Security Tools MCP Agent") as demo:
             
             with gr.Row():
                 test_connection_button = gr.Button("🔍 Test Server Connections", variant="secondary")
-                scan_button = gr.Button("🚀 Run Security Scan", variant="primary")
+                scan_button = gr.Button("🔍 Run Security Scan", variant="primary")
             
             server_status = gr.Markdown(label="📊 Server Connection Status")
     
@@ -564,6 +571,7 @@ with gr.Blocks(title="Security Tools MCP Agent") as demo:
         return None
     
     # Event handlers
+    
     test_connection_button.click(
         fn=check_servers_status,
         inputs=[server_checkboxes],
@@ -581,4 +589,7 @@ with gr.Blocks(title="Security Tools MCP Agent") as demo:
     )
 
 if __name__ == "__main__":
+    print("🚀 Launching Security Tools MCP Agent...")
+    print("📡 Connecting to existing MCP servers...")
+    print("⚠️ Make sure all MCP servers are running on configured ports before starting analysis")
     demo.launch(share=True)
