@@ -9,7 +9,6 @@ from agno.models.nebius import Nebius
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from dotenv import load_dotenv
-import base64
 import difflib
 import re
 import aiohttp
@@ -30,23 +29,23 @@ if not api_key:
 
 MCP_SERVERS = {
     "bandit": {
-        "url": "http://mcp-bandit:7860/gradio_api/mcp/sse",
+        "url": os.environ.get("MCP_BANDIT_URL", "http://mcp-bandit:7860/gradio_api/mcp/sse"),
         "description": "Python code security analysis"
     },
     "detect_secrets": {
-        "url": "http://mcp-detect-secrets:7860/gradio_api/mcp/sse", 
+        "url": os.environ.get("MCP_DETECT_SECRETS_URL", "http://mcp-detect-secrets:7860/gradio_api/mcp/sse"),
         "description": "Secret detection in code"
     },
     "pip_audit": {
-        "url": "http://mcp-pip-audit:7860/gradio_api/mcp/sse",
+        "url": os.environ.get("MCP_PIP_AUDIT_URL", "http://mcp-pip-audit:7860/gradio_api/mcp/sse"),
         "description": "Python package vulnerability scanning"
     },
     "circle_test": {
-        "url": "http://mcp-circle-test:7860/gradio_api/mcp/sse",
+        "url": os.environ.get("MCP_CIRCLE_TEST_URL", "http://mcp-circle-test:7860/gradio_api/mcp/sse"),
         "description": "Security policy compliance checking"
     },
     "semgrep": {
-        "url": "http://mcp-semgrep:7860/gradio_api/mcp/sse",
+        "url": os.environ.get("MCP_SEMGREP_URL", "http://mcp-semgrep:7860/gradio_api/mcp/sse"),
         "description": "Advanced static code analysis"
     }
 }

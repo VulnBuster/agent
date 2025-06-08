@@ -3,10 +3,7 @@
 Скрипт для автоматического тестирования Security Tools MCP Agent
 """
 
-import asyncio
 import requests
-import time
-import json
 
 def test_mcp_servers():
     """Тестирует доступность всех MCP серверов"""
@@ -108,10 +105,10 @@ def main():
     mcp_working = sum(1 for status in mcp_results.values() if status.startswith("✅"))
     gradio_working = 1 if gradio_status.startswith("✅") else 0
     
-    print(f"📊 Test Summary:")
+    print("📊 Test Summary:")
     print(f"   MCP Servers: {mcp_working}/5 working")
     print(f"   Gradio Interface: {gradio_working}/1 working")
-    print(f"   Test Files: Created test_vulnerable_code.py")
+    print("   Test Files: Created test_vulnerable_code.py")
     
     if mcp_working >= 4 and gradio_working == 1:
         print("🎉 System is ready for testing!")
