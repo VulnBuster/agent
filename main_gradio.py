@@ -30,23 +30,23 @@ if not api_key:
 
 MCP_SERVERS = {
     "bandit": {
-        "url": "http://localhost:7860/gradio_api/mcp/sse",
+        "url": "http://mcp-bandit:7860/gradio_api/mcp/sse",
         "description": "Python code security analysis"
     },
     "detect_secrets": {
-        "url": "http://localhost:7861/gradio_api/mcp/sse", 
+        "url": "http://mcp-detect-secrets:7860/gradio_api/mcp/sse", 
         "description": "Secret detection in code"
     },
     "pip_audit": {
-        "url": "http://localhost:7862/gradio_api/mcp/sse",
+        "url": "http://mcp-pip-audit:7860/gradio_api/mcp/sse",
         "description": "Python package vulnerability scanning"
     },
     "circle_test": {
-        "url": "http://localhost:7863/gradio_api/mcp/sse",
+        "url": "http://mcp-circle-test:7860/gradio_api/mcp/sse",
         "description": "Security policy compliance checking"
     },
     "semgrep": {
-        "url": "http://localhost:7864/gradio_api/mcp/sse",
+        "url": "http://mcp-semgrep:7860/gradio_api/mcp/sse",
         "description": "Advanced static code analysis"
     }
 }

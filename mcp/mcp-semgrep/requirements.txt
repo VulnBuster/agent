@@ -1,0 +1,2 @@
+gradio[mcp]==5.33.0
+semgrep==1.124.0
