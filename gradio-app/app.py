@@ -68,6 +68,28 @@ def generate_simple_diff(original_content: str, updated_content: str, file_path:
     stats = f"\n📊 Changes: +{added_lines} additions, -{removed_lines} deletions"
     return diff_content + stats
 
+async def wait_for_health(server_name, timeout=60, interval=2):
+    """Ждет готовности MCP-сервера через health check"""
+    import aiohttp
+    
+    health_url = f"http://mcp-{server_name}:7860/health"
+    start_time = time.time()
+    
+    while time.time() - start_time < timeout:
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(health_url, timeout=aiohttp.ClientTimeout(total=5)) as response:
+                    if response.status == 200:
+                        logger.info(f"✅ Health check passed for {server_name}")
+                        return True
+        except Exception as e:
+            logger.debug(f"Health check failed for {server_name}: {e}")
+        
+        await asyncio.sleep(interval)
+    
+    logger.error(f"❌ Health check timeout for {server_name} after {timeout}s")
+    return False
+
 async def run_mcp_agent(message, server_name):
     if not api_key:
         return "Error: Nebius API key not found in .env file"
@@ -75,9 +97,13 @@ async def run_mcp_agent(message, server_name):
     if server_name not in MCP_SERVERS:
         return f"Error: Unknown MCP server {server_name}"
     
-
+    # 1. HEALTH CHECK - ждем готовности сервера
+    logger.info(f"🏥 Checking health for {server_name}...")
+    health_ready = await wait_for_health(server_name, timeout=60, interval=2)
+    if not health_ready:
+        return f"Error: MCP server {server_name} not healthy"
     
-    max_connection_attempts = 2  # decrease attempts for faster response
+    max_connection_attempts = 2
     
     for attempt in range(max_connection_attempts):
         try:
@@ -98,18 +124,23 @@ async def run_mcp_agent(message, server_name):
             )
             
             try:
-                async with asyncio.timeout(30):  # Уменьшен с 60 до 30 секунд
+                # 3. УВЕЛИЧЕННЫЙ ТАЙМАУТ на подключение (60s вместо 30s)
+                async with asyncio.timeout(60):
                     async with stdio_client(server_params) as (read, write):
                         async with ClientSession(read, write) as session:
-                            await asyncio.sleep(1)  # Уменьшен с 2 до 1 секунды
+                            # 4. ПАУЗА после установки соединения
+                            await asyncio.sleep(3)  # Увеличено для стабилизации
                             
                             logger.info(f"Starting MCP session for {server_name}")
                             
                             mcp_tools = MCPTools(session=session)
                             try:
-                                async with asyncio.timeout(15):  # decrease timeout for faster response
+                                # 5. УВЕЛИЧЕННЫЙ ТАЙМАУТ на инициализацию (90s вместо 45s)
+                                async with asyncio.timeout(90):
                                     await mcp_tools.initialize()
-                                    await asyncio.sleep(0.5) 
+                                    # 6. ПАУЗА ПОСЛЕ ИНИЦИАЛИЗАЦИИ - критично для SSE!
+                                    logger.info(f"Waiting for {server_name} to fully stabilize...")
+                                    await asyncio.sleep(5)  # Большая пауза после initialize()
                                 logger.info(f"MCP tools initialized successfully for {server_name}")
                             except asyncio.TimeoutError:
                                 logger.error(f"MCP tools initialization timeout for {server_name}")
@@ -250,7 +281,8 @@ Show complete results and explain each finding clearly with priority levels."""
                             )
                             
                             try:
-                                async with asyncio.timeout(180):  # Увеличен с 120 до 180 секунд
+                                # 7. УВЕЛИЧЕННЫЙ ТАЙМАУТ на выполнение агента (240s вместо 180s)
+                                async with asyncio.timeout(240):
                                     response = await agent.arun(message)
                                 return response.content
                             except asyncio.TimeoutError:

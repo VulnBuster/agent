@@ -9,10 +9,6 @@ import json
 import os
 from typing import Dict
 
-@gr.mcp(
-    name="detect_secrets_scan",
-    description="Scan code for secrets using detect-secrets"
-)
 def detect_secrets_scan(
     code_input: str,
     scan_type: str = "code",
@@ -195,10 +191,6 @@ def detect_secrets_scan(
             "error": f"Error executing detect-secrets: {str(e)}"
         }
 
-@gr.mcp(
-    name="detect_secrets_baseline",
-    description="Create or update a baseline file for detect-secrets"
-)
 def detect_secrets_baseline(
     target_path: str,
     baseline_file: str,
@@ -259,10 +251,6 @@ def detect_secrets_baseline(
             "error": f"Error working with baseline: {str(e)}"
         }
 
-@gr.mcp(
-    name="detect_secrets_audit",
-    description="Audit a detect-secrets baseline file"
-)
 def detect_secrets_audit(
     baseline_file: str,
     show_stats: bool = False,
@@ -486,9 +474,22 @@ with gr.Blocks(title="Detect Secrets MCP") as demo:
         """)
 
 if __name__ == "__main__":
-    demo.queue(concurrency_count=8)\
+    import time
+    print("🔄 Starting Detect-Secrets MCP Server...")
+    time.sleep(2)  # Стабилизационная задержка
+    
+    # Добавляем health endpoint
+    from fastapi import FastAPI
+    app = FastAPI()
+    
+    @app.get("/health")
+    def health_check():
+        return {"status": "healthy", "service": "detect-secrets-mcp"}
+    
+    demo.queue()\
         .launch(
             mcp_server=True,
             server_name="0.0.0.0",
-            server_port=7860           
+            server_port=7860,
+            app=app  # Добавляем FastAPI app с health endpoint
         )

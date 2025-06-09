@@ -10,10 +10,6 @@ import os
 import tempfile
 from typing import Dict
 
-@gr.mcp(
-    name="semgrep_scan",
-    description="Scan code with Semgrep"
-)
 def semgrep_scan(
     code_input: str,
     scan_type: str = "code",
@@ -103,10 +99,6 @@ def semgrep_scan(
             "error": f"Error executing Semgrep: {str(e)}"
         }
 
-@gr.mcp(
-    name="semgrep_list_rules",
-    description="List available Semgrep rules"
-)
 def semgrep_list_rules() -> Dict:
     """
     Получает список доступных правил Semgrep.
@@ -214,9 +206,22 @@ with gr.Blocks(title="Semgrep MCP") as demo:
         """)
 
 if __name__ == "__main__":
-    demo.queue(concurrency_count=8)\
+    import time
+    print("🔄 Starting Semgrep MCP Server...")
+    time.sleep(2)  # Стабилизационная задержка
+    
+    # Добавляем health endpoint
+    from fastapi import FastAPI
+    app = FastAPI()
+    
+    @app.get("/health")
+    def health_check():
+        return {"status": "healthy", "service": "semgrep-mcp"}
+    
+    demo.queue()\
         .launch(
             mcp_server=True,
             server_name="0.0.0.0",
-            server_port=7860           
+            server_port=7860,
+            app=app  # Добавляем FastAPI app с health endpoint
         )
