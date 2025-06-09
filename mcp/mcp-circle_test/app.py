@@ -16,6 +16,10 @@ load_dotenv()
 # Получаем URL из переменных окружения
 CIRCLE_API_URL = os.getenv('CIRCLE_API_URL', 'https://api.example.com/protect/check_violation')
 
+@gr.mcp(
+    name="check_violation",
+    description="Check code against security policies"
+)
 async def check_violation(prompt: str, policies: Dict[str, str]) -> Dict:
     """
     Проверяет код на соответствие политикам безопасности.
@@ -150,4 +154,12 @@ with gr.Blocks(title="Circle Test MCP") as demo:
         """)
 
 if __name__ == "__main__":
-    demo.launch(mcp_server=True)
+    demo.queue(concurrency_count=8)\
+        .launch(
+            mcp_server=True,
+            server_name="0.0.0.0",
+            server_port=7860           
+        )
+
+
+

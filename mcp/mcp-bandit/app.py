@@ -5,6 +5,10 @@ import os
 import tempfile
 from typing import Dict
 
+@gr.mcp(
+    name="bandit_scan",
+    description="Scan code or path with Bandit and return JSON"
+)
 def bandit_scan(
     code_input: str,
     scan_type: str = "code",
@@ -111,6 +115,10 @@ def bandit_scan(
             "error": f"Error executing Bandit: {str(e)}"
         }
 
+@gr.mcp(
+    name="bandit_baseline",
+    description="Create or compare a Bandit baseline file"
+)
 def bandit_baseline(
     target_path: str,
     baseline_file: str
@@ -172,6 +180,10 @@ def bandit_baseline(
             "error": f"Error working with baseline: {str(e)}"
         }
 
+@gr.mcp(
+    name="bandit_profile_scan",
+    description="Run Bandit with a predefined profile"
+)
 def bandit_profile_scan(
     target_path: str,
     profile_name: str = "ShellInjection"
@@ -343,4 +355,9 @@ with gr.Blocks(title="Bandit Security Scanner MCP") as demo:
         """)
 
 if __name__ == "__main__":
-    demo.launch(mcp_server=True)
+    demo.queue(concurrency_count=8)\
+        .launch(
+            mcp_server=True,
+            server_name="0.0.0.0",
+            server_port=7860           
+        )

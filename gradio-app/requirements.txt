@@ -1,7 +1,6 @@
 gradio[http]==5.33.0
 agno==1.5.10
-asyncio==3.4.3
 python-dotenv==1.1.0
-aiohttp==3.12.10
+aiohttp>=3.8.0
 mcp==1.9.0
 openai==1.84.0

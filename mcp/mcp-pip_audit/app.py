@@ -8,6 +8,10 @@ import json
 from typing import Dict
 import gradio as gr
 
+@gr.mcp(
+    name="pip_audit_scan",
+    description="Scan Python environments for known vulnerabilities using pip-audit with basic settings"
+)
 def pip_audit_scan() -> Dict:
     """
     Scans Python environments for known vulnerabilities using pip-audit with basic settings.
@@ -76,4 +80,9 @@ with gr.Blocks(title="Pip Audit MCP") as demo:
         )
 
 if __name__ == "__main__":
-    demo.launch(mcp_server=True)
+    demo.queue(concurrency_count=8)\
+        .launch(
+            mcp_server=True,
+            server_name="0.0.0.0",
+            server_port=7860           
+        )

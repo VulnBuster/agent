@@ -10,6 +10,10 @@ import os
 import tempfile
 from typing import Dict
 
+@gr.mcp(
+    name="semgrep_scan",
+    description="Scan code with Semgrep"
+)
 def semgrep_scan(
     code_input: str,
     scan_type: str = "code",
@@ -99,6 +103,10 @@ def semgrep_scan(
             "error": f"Error executing Semgrep: {str(e)}"
         }
 
+@gr.mcp(
+    name="semgrep_list_rules",
+    description="List available Semgrep rules"
+)
 def semgrep_list_rules() -> Dict:
     """
     Получает список доступных правил Semgrep.
@@ -206,4 +214,9 @@ with gr.Blocks(title="Semgrep MCP") as demo:
         """)
 
 if __name__ == "__main__":
-    demo.launch(mcp_server=True)
+    demo.queue(concurrency_count=8)\
+        .launch(
+            mcp_server=True,
+            server_name="0.0.0.0",
+            server_port=7860           
+        )

@@ -91,7 +91,8 @@ async def run_mcp_agent(message, server_name):
                     "mcp-remote",
                     MCP_SERVERS[server_name]["url"],
                     "--transport",
-                    "sse-only"
+                    "sse-only",
+                    "--allow-http"  # Разрешаем HTTP соединения для Docker
                 ],
                 env={}
             )
@@ -108,6 +109,7 @@ async def run_mcp_agent(message, server_name):
                             try:
                                 async with asyncio.timeout(15):  # decrease timeout for faster response
                                     await mcp_tools.initialize()
+                                    await asyncio.sleep(0.5) 
                                 logger.info(f"MCP tools initialized successfully for {server_name}")
                             except asyncio.TimeoutError:
                                 logger.error(f"MCP tools initialization timeout for {server_name}")
@@ -248,7 +250,7 @@ Show complete results and explain each finding clearly with priority levels."""
                             )
                             
                             try:
-                                async with asyncio.timeout(60):  # Уменьшен с 120 до 60 секунд
+                                async with asyncio.timeout(180):  # Увеличен с 120 до 180 секунд
                                     response = await agent.arun(message)
                                 return response.content
                             except asyncio.TimeoutError:
@@ -297,9 +299,125 @@ async def run_fix_agent(message):
     except Exception as e:
         return f"Error proposing fixes: {e}"
 
+def generate_security_report(analysis_results, successful_analyses, total_servers):
+    """Генерирует краткий отчет о найденных уязвимостях"""
+    
+    # Паттерны для поиска уязвимостей
+    vulnerability_patterns = {
+        'critical': [
+            r'🚨.*?CRITICAL',
+            r'severity.*?(?:critical|high)',
+            r'confidence.*?high',
+            r'CVE-\d{4}-\d{4,}.*?(?:9\.|10\.)',
+            r'[Rr]emote [Cc]ode [Ee]xecution',
+            r'[Cc]ommand [Ii]njection',
+            r'[Ss]ql [Ii]njection',
+            r'shell.*?injection',
+            r'exec.*?input',
+            r'subprocess.*?shell=True'
+        ],
+        'high': [
+            r'⚠️.*?HIGH',
+            r'severity.*?medium',
+            r'CVE-\d{4}-\d{4,}.*?(?:[7-8]\.)',
+            r'XSS',
+            r'CSRF',
+            r'[Pp]ath [Tt]raversal',
+            r'hardcoded.*?(?:password|secret|key)',
+            r'API.*?key',
+            r'private.*?key',
+            r'oauth.*?token',
+            r'database.*?password'
+        ],
+        'medium': [
+            r'🔶.*?MEDIUM',
+            r'severity.*?low',
+            r'CVE-\d{4}-\d{4,}.*?(?:[4-6]\.)',
+            r'weak.*?(?:crypto|cipher|hash)',
+            r'insecure.*?random',
+            r'TODO.*?(?:security|auth|crypto)',
+            r'FIXME.*?(?:security|auth|crypto)',
+            r'md5|sha1(?!\d)',
+            r'deprecat.*?function'
+        ],
+        'low': [
+            r'📋.*?LOW',
+            r'CVE-\d{4}-\d{4,}.*?(?:[0-3]\.)',
+            r'deprecat.*?(?!security)',
+            r'code.*?style',
+            r'unused.*?import',
+            r'todo(?!.*security)',
+            r'fixme(?!.*security)'
+        ]
+    }
+    
+    # Подсчет уязвимостей по типам
+    vulnerability_counts = {level: 0 for level in vulnerability_patterns.keys()}
+    found_vulnerabilities = []
+    
+    # Анализируем результаты
+    for level, patterns in vulnerability_patterns.items():
+        for pattern in patterns:
+            matches = re.findall(pattern, analysis_results, re.IGNORECASE | re.MULTILINE)
+            vulnerability_counts[level] += len(matches)
+            for match in matches:
+                if match not in found_vulnerabilities:
+                    found_vulnerabilities.append(f"**{level.upper()}**: {match}")
+    
+    # Формируем отчет
+    total_vulnerabilities = sum(vulnerability_counts.values())
+    
+    if total_vulnerabilities == 0:
+        if successful_analyses == 0:
+            return "❌ **Ошибка анализа** - Не удалось подключиться к серверам безопасности"
+        else:
+            return "✅ **Уязвимости не найдены** - Код прошел все проверки безопасности"
+    
+    # Заголовок отчета
+    report_lines = [
+        f"🔍 **ОТЧЕТ О БЕЗОПАСНОСТИ**",
+        f"📊 Найдено уязвимостей: **{total_vulnerabilities}**",
+        f"🔧 Успешных анализов: **{successful_analyses}/{total_servers}**",
+        ""
+    ]
+    
+    # Сводка по уровням
+    if vulnerability_counts['critical'] > 0:
+        report_lines.append(f"🚨 **КРИТИЧНЫЕ**: {vulnerability_counts['critical']}")
+    if vulnerability_counts['high'] > 0:
+        report_lines.append(f"⚠️ **ВЫСОКИЕ**: {vulnerability_counts['high']}")
+    if vulnerability_counts['medium'] > 0:
+        report_lines.append(f"🔶 **СРЕДНИЕ**: {vulnerability_counts['medium']}")
+    if vulnerability_counts['low'] > 0:
+        report_lines.append(f"📋 **НИЗКИЕ**: {vulnerability_counts['low']}")
+    
+    report_lines.append("")
+    
+    # Рекомендации
+    if vulnerability_counts['critical'] > 0:
+        report_lines.append("⚡ **НЕМЕДЛЕННЫЕ ДЕЙСТВИЯ ТРЕБУЮТСЯ** - Обнаружены критичные уязвимости")
+    elif vulnerability_counts['high'] > 0:
+        report_lines.append("⚠️ **ТРЕБУЕТСЯ ВНИМАНИЕ** - Обнаружены серьезные проблемы безопасности")
+    elif vulnerability_counts['medium'] > 0:
+        report_lines.append("🔧 **РЕКОМЕНДУЕТСЯ ИСПРАВИТЬ** - Найдены уязвимости средней важности")
+    else:
+        report_lines.append("👀 **К СВЕДЕНИЮ** - Незначительные замечания по безопасности")
+    
+    # Добавляем список конкретных уязвимостей (первые 10)
+    if found_vulnerabilities:
+        report_lines.append("")
+        report_lines.append("📋 **Основные найденные проблемы:**")
+        for vuln in found_vulnerabilities[:10]:
+            report_lines.append(f"• {vuln}")
+        
+        if len(found_vulnerabilities) > 10:
+            report_lines.append(f"• ... и еще {len(found_vulnerabilities) - 10} проблем(ы)")
+    
+    return "\n".join(report_lines)
+
 async def process_file(file_obj, custom_checks, selected_servers):
     if not file_obj:
-        return "", "", ""
+        return "", "", "", ""
     
     try:
         temp_dir = tempfile.gettempdir()
@@ -412,12 +530,15 @@ Please generate a corrected version of this code, addressing the security vulner
         else:
             analysis_results += f"\n\n✅ **Summary**: {successful_analyses}/{len(selected_servers)} security analyses completed successfully."
         
-        return analysis_results, diff_text, cleaned_code
+        # Генерируем краткий отчет
+        security_report = generate_security_report(analysis_results, successful_analyses, len(selected_servers))
+        
+        return security_report, analysis_results, diff_text, cleaned_code
         
     except Exception as e:
         error_msg = f"An error occurred during file processing: {str(e)}"
         print(error_msg)
-        return error_msg, "", ""
+        return error_msg, "", "", ""
 
 async def test_mcp_server_connection(server_name):
     if server_name not in MCP_SERVERS:
@@ -457,7 +578,8 @@ async def test_mcp_protocol_connection(server_name):
                 "mcp-remote",
                 MCP_SERVERS[server_name]["url"],
                 "--transport",
-                "sse-only"
+                "sse-only",
+                "--allow-http"  # Разрешаем HTTP соединения для Docker
             ],
             env={}
         )
@@ -555,7 +677,13 @@ with gr.Blocks(title="Security Tools MCP Agent") as demo:
     
     with gr.Row():
         with gr.Column(scale=1):
-            analysis_output = gr.Markdown(label="🔍 Security Analysis Results")
+            # Отчет о безопасности в верхней части
+            security_report_output = gr.Markdown(label="📊 Краткий отчет о безопасности")
+            
+            # Детальные результаты анализа
+            analysis_output = gr.Markdown(label="🔍 Детальные результаты анализа")
+            
+            # Исправления и код
             diff_output = gr.Textbox(label="🔧 Proposed Code Fixes (Diff)", lines=10)
             fixed_code_output = gr.Code(label="✅ Fixed Code", language="python")
             download_button = gr.File(label="💾 Download corrected file")
@@ -580,7 +708,7 @@ with gr.Blocks(title="Security Tools MCP Agent") as demo:
     scan_button.click(
         fn=process_file,
         inputs=[file_input, custom_checks, server_checkboxes],
-        outputs=[analysis_output, diff_output, fixed_code_output]
+        outputs=[security_report_output, analysis_output, diff_output, fixed_code_output]
     ).then(
         fn=update_download_button,
         inputs=[fixed_code_output],
