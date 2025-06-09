@@ -1,0 +1,2 @@
+gradio[mcp]==5.33.0
+bandit[toml,baseline,sarif]==1.8.3

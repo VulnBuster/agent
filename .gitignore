@@ -5,7 +5,6 @@ ENV/
 
 # Environment variables
 .env
-.env.*
 
 # Gradio
 .gradio/
@@ -37,6 +36,3 @@ wheels/
 .vscode/
 *.swp
 *.swo 
-
-
-mcp/
