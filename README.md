@@ -1,57 +1,57 @@
 # 🔒 Security Tools MCP Agent
 
-Универсальный агент безопасности, объединяющий возможности нескольких инструментов статического анализа кода через MCP (Model Context Protocol).
+A universal security agent that combines the capabilities of multiple static code analysis tools through MCP (Model Context Protocol).
 
-## 🌟 Возможности
+## 🌟 Features
 
-- **Множественные инструменты безопасности:**
-  - Bandit: Анализ безопасности Python кода
-  - Detect Secrets: Поиск секретов в коде
-  - Pip Audit: Сканирование уязвимостей в зависимостях
-  - Circle Test: Проверка соответствия политикам безопасности
-  - Semgrep: Продвинутый статический анализ кода
+- **Multiple Security Tools:**
+  - Bandit: Python code security analysis
+  - Detect Secrets: Secret detection in code
+  - Pip Audit: Python package vulnerability scanning
+  - Circle Test: Security policy compliance checking
+  - Semgrep: Advanced static code analysis
 
-- **Удобный веб-интерфейс:**
-  - Загрузка файлов для анализа
-  - Выбор инструментов безопасности
-  - Детальные отчеты
-  - Предложения по исправлению
-  - Скачивание исправленного кода
+- **User-friendly Web Interface:**
+  - File upload for analysis
+  - Security tool selection
+  - Detailed reports
+  - Fix suggestions
+  - Corrected code download
 
-## 🚀 Установка
+## 🚀 Installation
 
-1. Установите Node.js и npm:
-   - Скачайте и установите Node.js с официального сайта: https://nodejs.org/
-   - Убедитесь, что установка прошла успешно, выполнив в терминале:
+1. Install Node.js and npm:
+   - Download and install Node.js from the official website: https://nodejs.org/
+   - Verify the installation by running in terminal:
      ```bash
      node --version
      npm --version
      ```
-  – если нет, то установите
-    ```bash
-    brew install node
-    ```
+   - If not installed, install using:
+     ```bash
+     brew install node
+     ```
 
-2. Клонируйте репозиторий:
+2. Clone the repository:
 ```bash
 git clone <repository-url>
 cd agent
 ```
 
-3. Создайте виртуальное окружение:
+3. Create a virtual environment:
 ```bash
 python -m venv venv
-source venv/bin/activate  # для Linux/Mac
-# или
-venv\Scripts\activate  # для Windows
+source venv/bin/activate  # for Linux/Mac
+# or
+venv\Scripts\activate  # for Windows
 ```
 
-4. Установите зависимости:
+4. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-5. Установите необходимые инструменты безопасности:
+5. Install required security tools:
 ```bash
 # Bandit
 pip install bandit
@@ -65,84 +65,84 @@ pip install pip-audit
 # Semgrep
 pip install semgrep
 
-# Circle Test зависимости
+# Circle Test dependencies
 pip install aiohttp python-dotenv
 ```
 
-## 🏃‍♂️ Запуск
+## 🏃‍♂️ Running
 
-1. Запустите все MCP серверы в отдельных терминалах:
+1. Start all MCP servers in separate terminals:
 
 ```bash
-# Терминал 1 - Bandit MCP
+# Terminal 1 - Bandit MCP
 python ../MCP-Hackathon/bandit_mcp.py
 
-# Терминал 2 - Detect Secrets MCP
+# Terminal 2 - Detect Secrets MCP
 python ../MCP-Hackathon/detect_secrets_mcp.py
 
-# Терминал 3 - Pip Audit MCP
+# Terminal 3 - Pip Audit MCP
 python ../MCP-Hackathon/pip_audit_mcp.py
 
-# Терминал 4 - Circle Test MCP
+# Terminal 4 - Circle Test MCP
 python ../MCP-Hackathon/circle_test_mcp.py
 
-# Терминал 5 - Semgrep MCP
+# Terminal 5 - Semgrep MCP
 python ../MCP-Hackathon/semgrep_mcp.py
 ```
 
-2. Запустите агента:
+2. Start the agent:
 ```bash
 python main_gradio.py
 ```
 
-3. Откройте веб-интерфейс:
+3. Open the web interface:
 ```
 http://localhost:8501
 ```
 
-## 🎯 Использование
+## 🎯 Usage
 
-1. Введите ваш Nebius API ключ в боковой панели
-2. Выберите инструменты безопасности для использования
-3. Загрузите файл для анализа
-4. (Опционально) Укажите конкретные проверки
-5. Нажмите "Run Security Analysis"
-6. Просмотрите отчет и предложенные исправления
-7. Скачайте исправленную версию кода
+1. Enter your Nebius API key in the sidebar
+2. Select security tools to use
+3. Upload a file for analysis
+4. (Optional) Specify particular checks
+5. Click "Run Security Analysis"
+6. Review the report and suggested fixes
+7. Download the corrected code version
 
-## 🔧 Конфигурация
+## 🔧 Configuration
 
-### Порты MCP серверов:
+### MCP Server Ports:
 - Bandit: 7860
 - Detect Secrets: 7861
 - Pip Audit: 7862
 - Circle Test: 7863
 - Semgrep: 7864
 
-### Переменные окружения:
-- `NEBIUS_API_KEY`: Ваш API ключ Nebius
+### Environment Variables:
+- `NEBIUS_API_KEY`: Your Nebius API key
 
-## 📝 Примеры использования
+## 📝 Usage Examples
 
-### Базовое сканирование:
-1. Загрузите Python файл
-2. Выберите все инструменты
-3. Нажмите "Run Security Analysis"
+### Basic Scanning:
+1. Upload a Python file
+2. Select all tools
+3. Click "Run Security Analysis"
 
-### Специфические проверки:
-1. Загрузите файл
-2. Введите "SQL injection, shell injection"
-3. Выберите нужные инструменты
-4. Запустите анализ
+### Specific Checks:
+1. Upload a file
+2. Enter "SQL injection, shell injection"
+3. Select desired tools
+4. Run the analysis
 
-## ⚠️ Примечания
+## ⚠️ Notes
 
-- Убедитесь, что все MCP серверы запущены перед использованием агента
-- Для полного анализа рекомендуется использовать все инструменты
-- Некоторые инструменты могут требовать дополнительной конфигурации
-- Результаты анализа могут отличаться в зависимости от выбранных инструментов
+- Ensure all MCP servers are running before using the agent
+- For complete analysis, it's recommended to use all tools
+- Some tools may require additional configuration
+- Analysis results may vary depending on selected tools
 
-## 🔗 Полезные ссылки
+## 🔗 Useful Links
 
 - [Bandit Documentation](https://bandit.readthedocs.io/)
 - [Detect Secrets Documentation](https://github.com/Yelp/detect-secrets)
