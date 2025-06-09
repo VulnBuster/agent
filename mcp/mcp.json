@@ -1,0 +1,54 @@
+{
+  "mcpServers": {
+    "bandit-security": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "mcp-remote", 
+        "http://localhost:7860/gradio_api/mcp/sse",
+        "--transport", 
+        "sse-only"
+      ]
+    },
+    "detect-secrets": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "mcp-remote", 
+        "http://localhost:7861/gradio_api/mcp/sse",
+        "--transport", 
+        "sse-only"
+      ]
+    },
+    "pip-audit": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "mcp-remote", 
+        "http://localhost:7862/gradio_api/mcp/sse",
+        "--transport", 
+        "sse-only"
+      ]
+    },
+    "circle-test": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "mcp-remote", 
+        "http://localhost:7863/gradio_api/mcp/sse",
+        "--transport", 
+        "sse-only"
+      ]
+    },
+    "semgrep": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "mcp-remote", 
+        "http://localhost:7864/gradio_api/mcp/sse",
+        "--transport", 
+        "sse-only"
+      ]
+    }
+  }
+}

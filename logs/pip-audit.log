@@ -1,0 +1,522 @@
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+  |     result = await app(  # type: ignore[func-returns-value]
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         self.scope, self.receive, self.send
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+  |     return await self.app(scope, receive, send)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+  |     await super().__call__(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+  |     await self.app(scope, receive, _send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/route_utils.py", line 834, in __call__
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+  |     await route.handle(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+  |     await self.app(scope, receive, _send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+  |     await route.handle(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+  |     response = await f(request)
+  |                ^^^^^^^^^^^^^^^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/mcp.py", line 232, in handle_sse
+  |     async with sse.connect_sse(
+  |                ~~~~~~~~~~~~~~~^
+  |         request.scope, request.receive, request._send
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ) as streams:
+  |     ^
+  |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 235, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 146, in connect_sse
+  |     async with anyio.create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 165, in connect_sse
+    |     yield (read_stream, write_stream)
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/mcp.py", line 235, in handle_sse
+    |     await self.mcp_server.run(
+    |     ...<3 lines>...
+    |     )
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/lowlevel/server.py", line 495, in run
+    |     async with AsyncExitStack() as stack:
+    |                ~~~~~~~~~~~~~~^^
+    |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 768, in __aexit__
+    |     raise exc
+    |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 751, in __aexit__
+    |     cb_suppress = await cb(*exc_details)
+    |                   ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/shared/session.py", line 220, in __aexit__
+    |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+    |     raise BaseExceptionGroup(
+    |         "unhandled errors in a TaskGroup", self._exceptions
+    |     ) from None
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/session.py", line 147, in _receive_loop
+      |     await super()._receive_loop()
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/shared/session.py", line 370, in _receive_loop
+      |     await self._received_request(responder)
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/session.py", line 175, in _received_request
+      |     raise RuntimeError(
+      |         "Received request before initialization was complete"
+      |     )
+      | RuntimeError: Received request before initialization was complete
+      +------------------------------------
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/route_utils.py", line 834, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 210, in handle_post_message
+    await writer.send(session_message)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 242, in send
+    self.send_nowait(item)
+    ~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 213, in send_nowait
+    raise BrokenResourceError
+anyio.BrokenResourceError
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+  |     result = await app(  # type: ignore[func-returns-value]
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         self.scope, self.receive, self.send
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+  |     return await self.app(scope, receive, send)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+  |     await super().__call__(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+  |     await self.app(scope, receive, _send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/route_utils.py", line 834, in __call__
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+  |     await route.handle(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+  |     await self.app(scope, receive, _send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+  |     await route.handle(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+  |     response = await f(request)
+  |                ^^^^^^^^^^^^^^^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/mcp.py", line 232, in handle_sse
+  |     async with sse.connect_sse(
+  |                ~~~~~~~~~~~~~~~^
+  |         request.scope, request.receive, request._send
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ) as streams:
+  |     ^
+  |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 235, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 146, in connect_sse
+  |     async with anyio.create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 165, in connect_sse
+    |     yield (read_stream, write_stream)
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/mcp.py", line 235, in handle_sse
+    |     await self.mcp_server.run(
+    |     ...<3 lines>...
+    |     )
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/lowlevel/server.py", line 495, in run
+    |     async with AsyncExitStack() as stack:
+    |                ~~~~~~~~~~~~~~^^
+    |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 768, in __aexit__
+    |     raise exc
+    |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 751, in __aexit__
+    |     cb_suppress = await cb(*exc_details)
+    |                   ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/shared/session.py", line 220, in __aexit__
+    |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+    |     raise BaseExceptionGroup(
+    |         "unhandled errors in a TaskGroup", self._exceptions
+    |     ) from None
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/session.py", line 147, in _receive_loop
+      |     await super()._receive_loop()
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/shared/session.py", line 370, in _receive_loop
+      |     await self._received_request(responder)
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/session.py", line 175, in _received_request
+      |     raise RuntimeError(
+      |         "Received request before initialization was complete"
+      |     )
+      | RuntimeError: Received request before initialization was complete
+      +------------------------------------
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/route_utils.py", line 834, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 210, in handle_post_message
+    await writer.send(session_message)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 242, in send
+    self.send_nowait(item)
+    ~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 213, in send_nowait
+    raise BrokenResourceError
+anyio.BrokenResourceError
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+  |     result = await app(  # type: ignore[func-returns-value]
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         self.scope, self.receive, self.send
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     )
+  |     ^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+  |     return await self.app(scope, receive, send)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+  |     await super().__call__(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+  |     await self.app(scope, receive, _send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/route_utils.py", line 834, in __call__
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+  |     await route.handle(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+  |     await self.app(scope, receive, _send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+  |     await route.handle(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+  |     await self.app(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+  |     raise exc
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+  |     response = await f(request)
+  |                ^^^^^^^^^^^^^^^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/mcp.py", line 232, in handle_sse
+  |     async with sse.connect_sse(
+  |                ~~~~~~~~~~~~~~~^
+  |         request.scope, request.receive, request._send
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |     ) as streams:
+  |     ^
+  |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 235, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 146, in connect_sse
+  |     async with anyio.create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 165, in connect_sse
+    |     yield (read_stream, write_stream)
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/mcp.py", line 235, in handle_sse
+    |     await self.mcp_server.run(
+    |     ...<3 lines>...
+    |     )
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/lowlevel/server.py", line 495, in run
+    |     async with AsyncExitStack() as stack:
+    |                ~~~~~~~~~~~~~~^^
+    |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 768, in __aexit__
+    |     raise exc
+    |   File "/opt/homebrew/Cellar/python@3.13/3.13.4/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 751, in __aexit__
+    |     cb_suppress = await cb(*exc_details)
+    |                   ^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/shared/session.py", line 220, in __aexit__
+    |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+    |     raise BaseExceptionGroup(
+    |         "unhandled errors in a TaskGroup", self._exceptions
+    |     ) from None
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/session.py", line 147, in _receive_loop
+      |     await super()._receive_loop()
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/shared/session.py", line 370, in _receive_loop
+      |     await self._received_request(responder)
+      |   File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/session.py", line 175, in _received_request
+      |     raise RuntimeError(
+      |         "Received request before initialization was complete"
+      |     )
+      | RuntimeError: Received request before initialization was complete
+      +------------------------------------
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/route_utils.py", line 834, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/starlette/routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/mcp/server/sse.py", line 210, in handle_post_message
+    await writer.send(session_message)
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 242, in send
+    self.send_nowait(item)
+    ~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/anyio/streams/memory.py", line 213, in send_nowait
+    raise BrokenResourceError
+anyio.BrokenResourceError

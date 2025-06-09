@@ -1,0 +1,339 @@
+gradio-app-1          | [399] Proxy established successfully between local STDIO and remote SSEClientTransport
+gradio-app-1          | [399] Press Ctrl+C to exit
+gradio-app-1          | 2025-06-09 13:34:24,697 - __main__ - INFO - Starting MCP session for pip_audit
+gradio-app-1          | [399] [Local→Remote] initialize
+gradio-app-1          | [399] {
+gradio-app-1          |   "jsonrpc": "2.0",
+gradio-app-1          |   "id": 0,
+gradio-app-1          |   "method": "initialize",
+gradio-app-1          |   "params": {
+gradio-app-1          |     "protocolVersion": "2025-03-26",
+gradio-app-1          |     "capabilities": {
+gradio-app-1          |       "sampling": {},
+gradio-app-1          |       "roots": {
+gradio-app-1          |         "listChanged": true
+gradio-app-1          |       }
+gradio-app-1          |     },
+gradio-app-1          |     "clientInfo": {
+gradio-app-1          |       "name": "mcp (via mcp-remote 0.1.14)",
+gradio-app-1          |       "version": "0.1.0"
+gradio-app-1          |     }
+gradio-app-1          |   }
+gradio-app-1          | }
+gradio-app-1          | [399] [Remote→Local] 0
+gradio-app-1          | [399] [Local→Remote] notifications/initialized
+gradio-app-1          | [399] [Local→Remote] tools/list
+gradio-app-1          | [399] Error from remote server: SseError: SSE error: undefined
+gradio-app-1          |     at _eventSource.onerror (file:///usr/lib/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12683:23)
+gradio-app-1          |     at EventSource.scheduleReconnect_fn (file:///usr/lib/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12598:53)
+gradio-app-1          |     at file:///usr/lib/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12445:223
+gradio-app-1          |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+gradio-app-1          |   code: undefined,
+gradio-app-1          |   event: {
+gradio-app-1          |     type: 'error',
+gradio-app-1          |     message: undefined,
+gradio-app-1          |     code: undefined,
+gradio-app-1          |     defaultPrevented: false,
+gradio-app-1          |     cancelable: false,
+gradio-app-1          |     timeStamp: 789.5692500025034
+gradio-app-1          |   }
+gradio-app-1          | }
+mcp-pip-audit-1       | ERROR:    Exception in ASGI application
+mcp-pip-audit-1       |   + Exception Group Traceback (most recent call last):
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+mcp-pip-audit-1       |   |     result = await app(  # type: ignore[func-returns-value]
+mcp-pip-audit-1       |   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+mcp-pip-audit-1       |   |     return await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+mcp-pip-audit-1       |   |     await super().__call__(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+mcp-pip-audit-1       |   |     await self.app(scope, receive, _send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/gradio/route_utils.py", line 834, in __call__
+mcp-pip-audit-1       |   |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+mcp-pip-audit-1       |   |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |   |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+mcp-pip-audit-1       |   |     await route.handle(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 460, in handle
+mcp-pip-audit-1       |   |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+mcp-pip-audit-1       |   |     await self.app(scope, receive, _send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+mcp-pip-audit-1       |   |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |   |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+mcp-pip-audit-1       |   |     await route.handle(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+mcp-pip-audit-1       |   |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+mcp-pip-audit-1       |   |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |   |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+mcp-pip-audit-1       |   |     response = await f(request)
+mcp-pip-audit-1       |   |                ^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/gradio/mcp.py", line 232, in handle_sse
+mcp-pip-audit-1       |   |     async with sse.connect_sse(
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/contextlib.py", line 222, in __aexit__
+mcp-pip-audit-1       |   |     await self.gen.athrow(typ, value, traceback)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/mcp/server/sse.py", line 146, in connect_sse
+mcp-pip-audit-1       |   |     async with anyio.create_task_group() as tg:
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+mcp-pip-audit-1       |   |     raise BaseExceptionGroup(
+mcp-pip-audit-1       |   | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+mcp-pip-audit-1       |   +-+---------------- 1 ----------------
+mcp-pip-audit-1       |     | Exception Group Traceback (most recent call last):
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/mcp/server/sse.py", line 165, in connect_sse
+mcp-pip-audit-1       |     |     yield (read_stream, write_stream)
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/gradio/mcp.py", line 235, in handle_sse
+mcp-pip-audit-1       |     |     await self.mcp_server.run(
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/mcp/server/lowlevel/server.py", line 495, in run
+mcp-pip-audit-1       |     |     async with AsyncExitStack() as stack:
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/contextlib.py", line 733, in __aexit__
+mcp-pip-audit-1       |     |     raise exc_details[1]
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/contextlib.py", line 716, in __aexit__
+mcp-pip-audit-1       |     |     cb_suppress = await cb(*exc_details)
+mcp-pip-audit-1       |     |                   ^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/mcp/shared/session.py", line 220, in __aexit__
+mcp-pip-audit-1       |     |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+mcp-pip-audit-1       |     |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+mcp-pip-audit-1       |     |     raise BaseExceptionGroup(
+mcp-pip-audit-1       |     | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+mcp-pip-audit-1       |     +-+---------------- 1 ----------------
+mcp-pip-audit-1       |       | Traceback (most recent call last):
+mcp-pip-audit-1       |       |   File "/usr/local/lib/python3.11/site-packages/mcp/server/session.py", line 147, in _receive_loop
+mcp-pip-audit-1       |       |     await super()._receive_loop()
+mcp-pip-audit-1       |       |   File "/usr/local/lib/python3.11/site-packages/mcp/shared/session.py", line 370, in _receive_loop
+mcp-pip-audit-1       |       |     await self._received_request(responder)
+mcp-pip-audit-1       |       |   File "/usr/local/lib/python3.11/site-packages/mcp/server/session.py", line 175, in _received_request
+mcp-pip-audit-1       |       |     raise RuntimeError(
+mcp-pip-audit-1       |       | RuntimeError: Received request before initialization was complete
+mcp-pip-audit-1       |       +------------------------------------
+mcp-pip-audit-1       | ERROR:    Exception in ASGI application
+mcp-pip-audit-1       | Traceback (most recent call last):
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+mcp-pip-audit-1       |     result = await app(  # type: ignore[func-returns-value]
+mcp-pip-audit-1       |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+mcp-pip-audit-1       |     return await self.app(scope, receive, send)
+mcp-pip-audit-1       |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+mcp-pip-audit-1       |     await super().__call__(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+mcp-pip-audit-1       |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+mcp-pip-audit-1       |     raise exc
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+mcp-pip-audit-1       |     await self.app(scope, receive, _send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/gradio/route_utils.py", line 834, in __call__
+mcp-pip-audit-1       |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+mcp-pip-audit-1       |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |     raise exc
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+mcp-pip-audit-1       |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+mcp-pip-audit-1       |     await route.handle(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 460, in handle
+mcp-pip-audit-1       |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+mcp-pip-audit-1       |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+mcp-pip-audit-1       |     raise exc
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+mcp-pip-audit-1       |     await self.app(scope, receive, _send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+mcp-pip-audit-1       |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |     raise exc
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+mcp-pip-audit-1       |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+mcp-pip-audit-1       |     await route.handle(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 460, in handle
+mcp-pip-audit-1       |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/mcp/server/sse.py", line 210, in handle_post_message
+mcp-pip-audit-1       |     await writer.send(session_message)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/anyio/streams/memory.py", line 242, in send
+mcp-pip-audit-1       |     self.send_nowait(item)
+mcp-pip-audit-1       |   File "/usr/local/lib/python3.11/site-packages/anyio/streams/memory.py", line 213, in send_nowait
+mcp-pip-audit-1       |     raise BrokenResourceError
+mcp-pip-audit-1       | anyio.BrokenResourceError
+mcp-pip-audit-1       | ERROR:    Exception in ASGI application
+mcp-pip-audit-1       |   + Exception Group Traceback (most recent call last):
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+mcp-pip-audit-1       |   |     result = await app(  # type: ignore[func-returns-value]
+mcp-pip-audit-1       |   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+mcp-pip-audit-1       |   |     return await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+mcp-pip-audit-1       |   |     await super().__call__(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+mcp-pip-audit-1       |   |     await self.app(scope, receive, _send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/gradio/route_utils.py", line 834, in __call__
+mcp-pip-audit-1       |   |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+mcp-pip-audit-1       |   |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |   |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+mcp-pip-audit-1       |   |     await route.handle(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 460, in handle
+mcp-pip-audit-1       |   |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 112, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+mcp-pip-audit-1       |   |     await self.app(scope, receive, _send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+mcp-pip-audit-1       |   |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |   |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 714, in __call__
+mcp-pip-audit-1       |   |     await self.middleware_stack(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 734, in app
+mcp-pip-audit-1       |   |     await route.handle(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+mcp-pip-audit-1       |   |     await self.app(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+mcp-pip-audit-1       |   |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+mcp-pip-audit-1       |   |     raise exc
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+mcp-pip-audit-1       |   |     await app(scope, receive, sender)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+mcp-pip-audit-1       |   |     response = await f(request)
+mcp-pip-audit-1       |   |                ^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/gradio/mcp.py", line 232, in handle_sse
+mcp-pip-audit-1       |   |     async with sse.connect_sse(
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/contextlib.py", line 222, in __aexit__
+mcp-pip-audit-1       |   |     await self.gen.athrow(typ, value, traceback)
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/mcp/server/sse.py", line 146, in connect_sse
+mcp-pip-audit-1       |   |     async with anyio.create_task_group() as tg:
+mcp-pip-audit-1       |   |   File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+mcp-pip-audit-1       |   |     raise BaseExceptionGroup(
+mcp-pip-audit-1       |   | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+mcp-pip-audit-1       |   +-+---------------- 1 ----------------
+mcp-pip-audit-1       |     | Exception Group Traceback (most recent call last):
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/mcp/server/sse.py", line 165, in connect_sse
+mcp-pip-audit-1       |     |     yield (read_stream, write_stream)
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/gradio/mcp.py", line 235, in handle_sse
+mcp-pip-audit-1       |     |     await self.mcp_server.run(
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/mcp/server/lowlevel/server.py", line 495, in run
+mcp-pip-audit-1       |     |     async with AsyncExitStack() as stack:
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/contextlib.py", line 733, in __aexit__
+mcp-pip-audit-1       |     |     raise exc_details[1]
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/contextlib.py", line 716, in __aexit__
+mcp-pip-audit-1       |     |     cb_suppress = await cb(*exc_details)
+mcp-pip-audit-1       |     |                   ^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/mcp/shared/session.py", line 220, in __aexit__
+mcp-pip-audit-1       |     |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+mcp-pip-audit-1       |     |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mcp-pip-audit-1       |     |   File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+mcp-pip-audit-1       |     |     raise BaseExceptionGroup(
+mcp-pip-audit-1       |     | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+mcp-pip-audit-1       |     +-+---------------- 1 ----------------
+mcp-pip-audit-1       |       | Exception Group Traceback (most recent call last):
+mcp-pip-audit-1       |       |   File "/usr/local/lib/python3.11/site-packages/mcp/server/lowlevel/server.py", line 506, in run
+mcp-pip-audit-1       |       |     async with anyio.create_task_group() as tg:
+mcp-pip-audit-1       |       |   File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 772, in __aexit__
+mcp-pip-audit-1       |       |     raise BaseExceptionGroup(
+mcp-pip-audit-1       |       | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+mcp-pip-audit-1       |       +-+---------------- 1 ----------------
+mcp-pip-audit-1       |         | Traceback (most recent call last):
+mcp-pip-audit-1       |         |   File "/usr/local/lib/python3.11/site-packages/mcp/server/lowlevel/server.py", line 534, in _handle_message
+mcp-pip-audit-1       |         |     await self._handle_request(
+mcp-pip-audit-1       |         |   File "/usr/local/lib/python3.11/site-packages/mcp/server/lowlevel/server.py", line 580, in _handle_request
+mcp-pip-audit-1       |         |     await message.respond(response)
+mcp-pip-audit-1       |         |   File "/usr/local/lib/python3.11/site-packages/mcp/shared/session.py", line 131, in respond
+mcp-pip-audit-1       |         |     await self._session._send_response(  # type: ignore[reportPrivateUsage]
+mcp-pip-audit-1       |         |   File "/usr/local/lib/python3.11/site-packages/mcp/shared/session.py", line 343, in _send_response
+mcp-pip-audit-1       |         |     await self._write_stream.send(session_message)
+mcp-pip-audit-1       |         |   File "/usr/local/lib/python3.11/site-packages/anyio/streams/memory.py", line 242, in send
+mcp-pip-audit-1       |         |     self.send_nowait(item)
+mcp-pip-audit-1       |         |   File "/usr/local/lib/python3.11/site-packages/anyio/streams/memory.py", line 211, in send_nowait
+mcp-pip-audit-1       |         |     raise ClosedResourceError
+mcp-pip-audit-1       |         | anyio.ClosedResourceError
+mcp-pip-audit-1       |         +------------------------------------
+gradio-app-1          | [399] 
+gradio-app-1          | Shutting down...
+gradio-app-1          | 2025-06-09 13:34:53,749 - __main__ - ERROR - Connection timeout for pip_audit (attempt 2)
+gradio-app-1          | 2025-06-09 13:34:53,750 - __main__ - WARNING - ❌ pip_audit analysis failed (attempt 1): Error: Connection timeout for pip_audit after 2 attempts
+gradio-app-1          | 2025-06-09 13:34:53,750 - __main__ - INFO - Waiting 3 seconds before retry for pip_audit...
+gradio-app-1          | 2025-06-09 13:34:56,751 - __main__ - INFO - Running analysis with pip_audit (attempt 2/2)
+gradio-app-1          | 2025-06-09 13:34:56,751 - __main__ - INFO - Attempting to connect to pip_audit (attempt 1/2)
+gradio-app-1          | 2025-06-09 13:34:56,751 - __main__ - INFO - Server URL: http://mcp-pip-audit:7860/gradio_api/mcp/sse
+gradio-app-1          | [423] Using transport strategy: sse-only
+gradio-app-1          | [423] Using automatically selected callback port: 33699
+gradio-app-1          | [423] [423] Connecting to remote server: http://mcp-pip-audit:7860/gradio_api/mcp/sse
+gradio-app-1          | [423] Using transport strategy: sse-only
+gradio-app-1          | [423] Connected to remote server using SSEClientTransport
+gradio-app-1          | [423] Local STDIO server running
+gradio-app-1          | [423] Proxy established successfully between local STDIO and remote SSEClientTransport
+gradio-app-1          | [423] Press Ctrl+C to exit
+gradio-app-1          | 2025-06-09 13:34:57,761 - __main__ - INFO - Starting MCP session for pip_audit
+gradio-app-1          | [423] [Local→Remote] initialize
+gradio-app-1          | [423] {
+gradio-app-1          |   "jsonrpc": "2.0",
+gradio-app-1          |   "id": 0,
+gradio-app-1          |   "method": "initialize",
+gradio-app-1          |   "params": {
+gradio-app-1          |     "protocolVersion": "2025-03-26",
+gradio-app-1          |     "capabilities": {
+gradio-app-1          |       "sampling": {},
+gradio-app-1          |       "roots": {
+gradio-app-1          |         "listChanged": true
+gradio-app-1          |       }
+gradio-app-1          |     },
+gradio-app-1          |     "clientInfo": {
+gradio-app-1          |       "name": "mcp (via mcp-remote 0.1.14)",
+gradio-app-1          |       "version": "0.1.0"
+gradio-app-1          |     }
+gradio-app-1          |   }
+gradio-app-1          | }
+gradio-app-1          | [423] [Remote→Local] 0
+gradio-app-1          | [423] [Local→Remote] notifications/initialized
+gradio-app-1          | [423] [Local→Remote] tools/list
+gradio-app-1          | [423] [Remote→Local] 1
+gradio-app-1          | 2025-06-09 13:34:59,801 - __main__ - INFO - MCP tools initialized successfully for pip_audit

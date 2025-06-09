@@ -1,0 +1,10 @@
+venv/
+.env
+.DS_Store
+.vscode
+.idea
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.pytest_cache
+circle_test.py

@@ -1,0 +1,2 @@
+/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packages/gradio/mcp.py:123: UserWarning: This MCP server includes a tool that has a gr.State input, which will not be updated between tool calls. The original, default value of the State will be used each time.
+  warnings.warn(

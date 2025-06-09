@@ -8,7 +8,8 @@ import subprocess
 import json
 import os
 import tempfile
-from typing import Dict
+from typing import Dict, List, Optional
+from pathlib import Path
 
 @gr.mcp(
     name="semgrep_scan",
@@ -220,3 +221,4 @@ if __name__ == "__main__":
             server_name="0.0.0.0",
             server_port=7860           
         )
+    

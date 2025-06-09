@@ -7,8 +7,14 @@ import gradio as gr
 import subprocess
 import json
 import os
-from typing import Dict
+import tempfile
+from typing import Dict, List, Optional
+from pathlib import Path
 
+@gr.mcp(
+    name="detect_secrets_scan",
+    description="Scan code for secrets using detect-secrets"
+)
 def detect_secrets_scan(
     code_input: str,
     scan_type: str = "code",
@@ -191,6 +197,10 @@ def detect_secrets_scan(
             "error": f"Error executing detect-secrets: {str(e)}"
         }
 
+@gr.mcp(
+    name="detect_secrets_baseline",
+    description="Create or update a baseline file for detect-secrets"
+)
 def detect_secrets_baseline(
     target_path: str,
     baseline_file: str,
@@ -251,6 +261,10 @@ def detect_secrets_baseline(
             "error": f"Error working with baseline: {str(e)}"
         }
 
+@gr.mcp(
+    name="detect_secrets_audit",
+    description="Audit a detect-secrets baseline file"
+)
 def detect_secrets_audit(
     baseline_file: str,
     show_stats: bool = False,

@@ -5,9 +5,10 @@ MCP server for Circle Test - a tool for checking code against security policies
 
 import gradio as gr
 import aiohttp
+import asyncio
 import ssl
 import os
-from typing import Dict
+from typing import Dict, List
 from dotenv import load_dotenv
 
 # Загружаем переменные окружения
@@ -16,7 +17,7 @@ load_dotenv()
 # Получаем URL из переменных окружения
 CIRCLE_API_URL = os.getenv('CIRCLE_API_URL', 'https://api.example.com/protect/check_violation')
 
-@gr.mcp(
+@gr.mcp(                               # ← ① декоратор MCP
     name="check_violation",
     description="Check code against security policies"
 )
@@ -160,6 +161,3 @@ if __name__ == "__main__":
             server_name="0.0.0.0",
             server_port=7860           
         )
-
-
-

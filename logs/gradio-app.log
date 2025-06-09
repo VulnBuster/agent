@@ -1,0 +1,627 @@
+2025-06-09 18:04:41,126 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-06-09 18:04:41,133 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-06-09 18:04:42,379 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-06-09 18:04:42,529 - httpx - INFO - HTTP Request: GET https://api.gradio.app/v3/tunnel-request "HTTP/1.1 200 OK"
+2025-06-09 18:04:53,991 - __main__ - INFO - Starting analysis with bandit...
+2025-06-09 18:04:54,513 - __main__ - INFO - Running analysis with bandit (attempt 1/2)
+2025-06-09 18:04:54,513 - __main__ - INFO - 🏥 Checking server for bandit...
+2025-06-09 18:04:54,524 - __main__ - INFO - ✅ Server check passed for bandit
+2025-06-09 18:04:54,524 - __main__ - INFO - Attempting to connect to bandit (attempt 1/2)
+2025-06-09 18:04:54,524 - __main__ - INFO - Server URL: http://localhost:7861/gradio_api/mcp/sse
+2025-06-09 18:04:57,529 - __main__ - INFO - Starting MCP session for bandit
+[75366] Using transport strategy: sse-only
+[75366] Using automatically selected callback port: 37075
+[75366] [75366] Connecting to remote server: http://localhost:7861/gradio_api/mcp/sse
+[75366] Using transport strategy: sse-only
+[75366] Connected to remote server using SSEClientTransport
+[75366] Local STDIO server running
+[75366] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75366] Press Ctrl+C to exit
+[75366] [Local→Remote] initialize
+[75366] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75366] [Remote→Local] 0
+[75366] [Local→Remote] notifications/initialized
+[75366] [Local→Remote] tools/list
+[75366] [Remote→Local] 1
+2025-06-09 18:05:01,003 - __main__ - INFO - Waiting for bandit to fully stabilize...
+2025-06-09 18:05:06,004 - __main__ - INFO - MCP tools initialized successfully for bandit
+2025-06-09 18:05:17,012 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75366] [Local→Remote] tools/call
+[75366] [Remote→Local] 2
+2025-06-09 18:05:29,030 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-09 18:05:30,132 - httpx - INFO - HTTP Request: POST https://api.agno.com/v1/telemetry/agent/run/create "HTTP/1.1 200 OK"
+2025-06-09 18:05:30,214 - __main__ - INFO - ✅ bandit analysis completed successfully
+2025-06-09 18:05:30,214 - __main__ - INFO - Starting analysis with detect_secrets...
+2025-06-09 18:05:30,725 - __main__ - INFO - Running analysis with detect_secrets (attempt 1/2)
+2025-06-09 18:05:30,726 - __main__ - INFO - 🏥 Checking server for detect_secrets...
+2025-06-09 18:05:30,731 - __main__ - INFO - ✅ Server check passed for detect_secrets
+2025-06-09 18:05:30,731 - __main__ - INFO - Attempting to connect to detect_secrets (attempt 1/2)
+2025-06-09 18:05:30,731 - __main__ - INFO - Server URL: http://localhost:7862/gradio_api/mcp/sse
+[75430] Using transport strategy: sse-only
+[75430] Using automatically selected callback port: 4538
+[75430] [75430] Connecting to remote server: http://localhost:7862/gradio_api/mcp/sse
+[75430] Using transport strategy: sse-only
+[75430] Connected to remote server using SSEClientTransport
+[75430] Local STDIO server running
+[75430] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75430] Press Ctrl+C to exit
+2025-06-09 18:05:33,736 - __main__ - INFO - Starting MCP session for detect_secrets
+[75430] [Local→Remote] initialize
+[75430] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75430] [Remote→Local] 0
+[75430] [Local→Remote] notifications/initialized
+[75430] [Local→Remote] tools/list
+[75430] [Remote→Local] 1
+2025-06-09 18:05:33,766 - __main__ - INFO - Waiting for detect_secrets to fully stabilize...
+2025-06-09 18:05:38,766 - __main__ - INFO - MCP tools initialized successfully for detect_secrets
+2025-06-09 18:05:56,161 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75430] [Local→Remote] tools/call
+[75430] [Local→Remote] tools/call
+[75430] [Remote→Local] 2
+[75430] [Remote→Local] 3
+🚀 Launching Security Tools MCP Agent...
+📡 Connecting to existing MCP servers...
+⚠️ Make sure all MCP servers are running on configured ports before starting analysis
+* Running on local URL:  http://127.0.0.1:7860
+* Running on public URL: https://1670d23bc453bec282.gradio.live
+
+This share link expires in 1 week. For free permanent hosting and GPU upgrades, run `gradio deploy` from the terminal in the working directory to deploy to Hugging Face Spaces (https://huggingface.co/spaces)
+ERROR    Failed to call MCP tool 'detect_secrets_scan': Error from MCP tool     
+         'detect_secrets_scan': [TextContent(type='text', text='No value        
+         provided for required argument: exclude_lines', annotations=None)]     
+         Traceback (most recent call last):                                     
+           File                                                                 
+         "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packag
+         es/agno/utils/mcp.py", line 37, in call_tool                           
+             raise Exception(f"Error from MCP tool '{tool_name}':               
+         {result.content}")                                                     
+         Exception: Error from MCP tool 'detect_secrets_scan':                  
+         [TextContent(type='text', text='No value provided for required         
+         argument: exclude_lines', annotations=None)]                           
+ERROR    Failed to call MCP tool 'detect_secrets_scan': Error from MCP tool     
+         'detect_secrets_scan': [TextContent(type='text', text='No value        
+         provided for required argument: exclude_lines', annotations=None)]     
+         Traceback (most recent call last):                                     
+           File                                                                 
+         "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packag
+         es/agno/utils/mcp.py", line 37, in call_tool                           
+             raise Exception(f"Error from MCP tool '{tool_name}':               
+         {result.content}")                                                     
+         Exception: Error from MCP tool 'detect_secrets_scan':                  
+         [TextContent(type='text', text='No value provided for required         
+         argument: exclude_lines', annotations=None)]                           
+2025-06-09 18:06:13,222 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75430] [Local→Remote] tools/call
+[75430] [Local→Remote] tools/call
+[75430] [Remote→Local] 5
+[75430] [Remote→Local] 4
+2025-06-09 18:06:30,751 - __main__ - ERROR - Connection timeout for detect_secrets (attempt 1)
+2025-06-09 18:06:32,753 - __main__ - INFO - Attempting to connect to detect_secrets (attempt 2/2)
+2025-06-09 18:06:32,753 - __main__ - INFO - Server URL: http://localhost:7862/gradio_api/mcp/sse
+[75490] Using transport strategy: sse-only
+[75490] Using automatically selected callback port: 4538
+[75490] [75490] Connecting to remote server: http://localhost:7862/gradio_api/mcp/sse
+[75490] Using transport strategy: sse-only
+[75490] Connected to remote server using SSEClientTransport
+[75490] Local STDIO server running
+[75490] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75490] Press Ctrl+C to exit
+2025-06-09 18:06:35,764 - __main__ - INFO - Starting MCP session for detect_secrets
+[75490] [Local→Remote] initialize
+[75490] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75490] [Remote→Local] 0
+[75490] [Local→Remote] notifications/initialized
+[75490] [Local→Remote] tools/list
+[75490] Error from remote server: SseError: SSE error: undefined
+    at _eventSource.onerror (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12683:23)
+    at EventSource.scheduleReconnect_fn (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12598:53)
+    at file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12445:223
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  code: undefined,
+  event: {
+    type: 'error',
+    message: undefined,
+    code: undefined,
+    defaultPrevented: false,
+    cancelable: false,
+    timeStamp: 2023.17775
+  }
+}
+2025-06-09 18:07:32,800 - __main__ - ERROR - Connection timeout for detect_secrets (attempt 2)
+2025-06-09 18:07:32,800 - __main__ - WARNING - ❌ detect_secrets analysis failed (attempt 1): Error: Connection timeout for detect_secrets after 2 attempts
+2025-06-09 18:07:32,800 - __main__ - INFO - Waiting 3 seconds before retry for detect_secrets...
+2025-06-09 18:07:35,801 - __main__ - INFO - Running analysis with detect_secrets (attempt 2/2)
+2025-06-09 18:07:35,802 - __main__ - INFO - 🏥 Checking server for detect_secrets...
+2025-06-09 18:07:35,821 - __main__ - INFO - ✅ Server check passed for detect_secrets
+2025-06-09 18:07:35,821 - __main__ - INFO - Attempting to connect to detect_secrets (attempt 1/2)
+2025-06-09 18:07:35,821 - __main__ - INFO - Server URL: http://localhost:7862/gradio_api/mcp/sse
+[75564] Using transport strategy: sse-only
+[75564] Using automatically selected callback port: 4538
+[75564] [75564] Connecting to remote server: http://localhost:7862/gradio_api/mcp/sse
+[75564] Using transport strategy: sse-only
+[75564] Connected to remote server using SSEClientTransport
+[75564] Local STDIO server running
+[75564] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75564] Press Ctrl+C to exit
+2025-06-09 18:07:38,832 - __main__ - INFO - Starting MCP session for detect_secrets
+[75564] [Local→Remote] initialize
+[75564] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75564] [Remote→Local] 0
+[75564] [Local→Remote] notifications/initialized
+[75564] [Local→Remote] tools/list
+[75564] [Remote→Local] 1
+2025-06-09 18:07:38,888 - __main__ - INFO - Waiting for detect_secrets to fully stabilize...
+2025-06-09 18:07:43,891 - __main__ - INFO - MCP tools initialized successfully for detect_secrets
+2025-06-09 18:08:13,719 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75564] [Local→Remote] tools/call
+[75564] [Remote→Local] 2
+ERROR    Failed to call MCP tool 'detect_secrets_scan': Error from MCP tool     
+         'detect_secrets_scan': [TextContent(type='text', text='No value        
+         provided for required argument: exclude_lines', annotations=None)]     
+         Traceback (most recent call last):                                     
+           File                                                                 
+         "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packag
+         es/agno/utils/mcp.py", line 37, in call_tool                           
+             raise Exception(f"Error from MCP tool '{tool_name}':               
+         {result.content}")                                                     
+         Exception: Error from MCP tool 'detect_secrets_scan':                  
+         [TextContent(type='text', text='No value provided for required         
+         argument: exclude_lines', annotations=None)]                           
+2025-06-09 18:08:34,849 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75564] [Local→Remote] tools/call
+[75564] [Remote→Local] 3
+[75564] 
+Shutting down...
+2025-06-09 18:08:35,841 - __main__ - ERROR - Connection timeout for detect_secrets (attempt 1)
+2025-06-09 18:08:37,842 - __main__ - INFO - Attempting to connect to detect_secrets (attempt 2/2)
+2025-06-09 18:08:37,842 - __main__ - INFO - Server URL: http://localhost:7862/gradio_api/mcp/sse
+[75655] Using transport strategy: sse-only
+[75655] Using automatically selected callback port: 4538
+[75655] [75655] Connecting to remote server: http://localhost:7862/gradio_api/mcp/sse
+[75655] Using transport strategy: sse-only
+[75655] Connected to remote server using SSEClientTransport
+[75655] Local STDIO server running
+[75655] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75655] Press Ctrl+C to exit
+2025-06-09 18:08:40,857 - __main__ - INFO - Starting MCP session for detect_secrets
+[75655] [Local→Remote] initialize
+[75655] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75655] [Remote→Local] 0
+[75655] [Local→Remote] notifications/initialized
+[75655] [Local→Remote] tools/list
+[75655] [Remote→Local] 1
+2025-06-09 18:08:40,885 - __main__ - INFO - Waiting for detect_secrets to fully stabilize...
+2025-06-09 18:08:45,886 - __main__ - INFO - MCP tools initialized successfully for detect_secrets
+2025-06-09 18:09:08,498 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75655] [Local→Remote] tools/call
+[75655] [Remote→Local] 2
+ERROR    Failed to call MCP tool 'detect_secrets_scan': Error from MCP tool     
+         'detect_secrets_scan': [TextContent(type='text', text='No value        
+         provided for required argument: exclude_lines', annotations=None)]     
+         Traceback (most recent call last):                                     
+           File                                                                 
+         "/Users/rustem/Documents/projects/agent/venv/lib/python3.13/site-packag
+         es/agno/utils/mcp.py", line 37, in call_tool                           
+             raise Exception(f"Error from MCP tool '{tool_name}':               
+         {result.content}")                                                     
+         Exception: Error from MCP tool 'detect_secrets_scan':                  
+         [TextContent(type='text', text='No value provided for required         
+         argument: exclude_lines', annotations=None)]                           
+2025-06-09 18:09:30,328 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75655] [Local→Remote] tools/call
+[75655] [Remote→Local] 3
+[75655] 
+Shutting down...
+2025-06-09 18:09:37,863 - __main__ - ERROR - Connection timeout for detect_secrets (attempt 2)
+2025-06-09 18:09:37,863 - __main__ - WARNING - ❌ detect_secrets analysis failed (attempt 2): Error: Connection timeout for detect_secrets after 2 attempts
+2025-06-09 18:09:37,863 - __main__ - INFO - Starting analysis with pip_audit...
+2025-06-09 18:09:38,384 - __main__ - INFO - Running analysis with pip_audit (attempt 1/2)
+2025-06-09 18:09:38,384 - __main__ - INFO - 🏥 Checking server for pip_audit...
+2025-06-09 18:09:38,392 - __main__ - INFO - ✅ Server check passed for pip_audit
+2025-06-09 18:09:38,392 - __main__ - INFO - Attempting to connect to pip_audit (attempt 1/2)
+2025-06-09 18:09:38,392 - __main__ - INFO - Server URL: http://localhost:7863/gradio_api/mcp/sse
+[75737] Using transport strategy: sse-only
+[75737] Using automatically selected callback port: 14608
+[75737] [75737] Connecting to remote server: http://localhost:7863/gradio_api/mcp/sse
+[75737] Using transport strategy: sse-only
+[75737] Connected to remote server using SSEClientTransport
+[75737] Local STDIO server running
+[75737] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75737] Press Ctrl+C to exit
+2025-06-09 18:09:41,399 - __main__ - INFO - Starting MCP session for pip_audit
+[75737] [Local→Remote] initialize
+[75737] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75737] [Remote→Local] 0
+[75737] [Local→Remote] notifications/initialized
+[75737] [Local→Remote] tools/list
+[75737] [Remote→Local] 1
+2025-06-09 18:09:41,426 - __main__ - INFO - Waiting for pip_audit to fully stabilize...
+2025-06-09 18:09:46,427 - __main__ - INFO - MCP tools initialized successfully for pip_audit
+2025-06-09 18:10:01,154 - openai._base_client - INFO - Retrying request to /chat/completions in 0.473794 seconds
+2025-06-09 18:10:34,382 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[75737] [Local→Remote] tools/call
+[75737] [Remote→Local] 2
+[75737] 
+Shutting down...
+2025-06-09 18:10:38,412 - __main__ - ERROR - Connection timeout for pip_audit (attempt 1)
+2025-06-09 18:10:40,413 - __main__ - INFO - Attempting to connect to pip_audit (attempt 2/2)
+2025-06-09 18:10:40,413 - __main__ - INFO - Server URL: http://localhost:7863/gradio_api/mcp/sse
+[75793] Using transport strategy: sse-only
+[75793] Using automatically selected callback port: 14608
+[75793] [75793] Connecting to remote server: http://localhost:7863/gradio_api/mcp/sse
+[75793] Using transport strategy: sse-only
+[75793] Connected to remote server using SSEClientTransport
+[75793] Local STDIO server running
+[75793] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75793] Press Ctrl+C to exit
+2025-06-09 18:10:43,420 - __main__ - INFO - Starting MCP session for pip_audit
+[75793] [Local→Remote] initialize
+[75793] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75793] [Remote→Local] 0
+[75793] [Local→Remote] notifications/initialized
+[75793] [Local→Remote] tools/list
+[75793] Error from remote server: SseError: SSE error: undefined
+    at _eventSource.onerror (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12683:23)
+    at EventSource.scheduleReconnect_fn (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12598:53)
+    at file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12445:223
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  code: undefined,
+  event: {
+    type: 'error',
+    message: undefined,
+    code: undefined,
+    defaultPrevented: false,
+    cancelable: false,
+    timeStamp: 1924.010958
+  }
+}
+2025-06-09 18:11:40,437 - __main__ - ERROR - Connection timeout for pip_audit (attempt 2)
+2025-06-09 18:11:40,438 - __main__ - WARNING - ❌ pip_audit analysis failed (attempt 1): Error: Connection timeout for pip_audit after 2 attempts
+2025-06-09 18:11:40,438 - __main__ - INFO - Waiting 3 seconds before retry for pip_audit...
+2025-06-09 18:11:43,438 - __main__ - INFO - Running analysis with pip_audit (attempt 2/2)
+2025-06-09 18:11:43,438 - __main__ - INFO - 🏥 Checking server for pip_audit...
+2025-06-09 18:11:43,453 - __main__ - INFO - ✅ Server check passed for pip_audit
+2025-06-09 18:11:43,455 - __main__ - INFO - Attempting to connect to pip_audit (attempt 1/2)
+2025-06-09 18:11:43,455 - __main__ - INFO - Server URL: http://localhost:7863/gradio_api/mcp/sse
+[75888] Using transport strategy: sse-only
+[75888] Using automatically selected callback port: 14608
+[75888] [75888] Connecting to remote server: http://localhost:7863/gradio_api/mcp/sse
+[75888] Using transport strategy: sse-only
+[75888] Connected to remote server using SSEClientTransport
+[75888] Local STDIO server running
+[75888] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75888] Press Ctrl+C to exit
+2025-06-09 18:11:46,461 - __main__ - INFO - Starting MCP session for pip_audit
+[75888] [Local→Remote] initialize
+[75888] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75888] [Remote→Local] 0
+[75888] [Local→Remote] notifications/initialized
+[75888] [Local→Remote] tools/list
+[75888] Error from remote server: SseError: SSE error: undefined
+    at _eventSource.onerror (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12683:23)
+    at EventSource.scheduleReconnect_fn (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12598:53)
+    at file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12445:223
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  code: undefined,
+  event: {
+    type: 'error',
+    message: undefined,
+    code: undefined,
+    defaultPrevented: false,
+    cancelable: false,
+    timeStamp: 2041.440667
+  }
+}
+2025-06-09 18:12:43,489 - __main__ - ERROR - Connection timeout for pip_audit (attempt 1)
+2025-06-09 18:12:45,491 - __main__ - INFO - Attempting to connect to pip_audit (attempt 2/2)
+2025-06-09 18:12:45,491 - __main__ - INFO - Server URL: http://localhost:7863/gradio_api/mcp/sse
+[75943] Using transport strategy: sse-only
+[75943] Using automatically selected callback port: 14608
+[75943] [75943] Connecting to remote server: http://localhost:7863/gradio_api/mcp/sse
+[75943] Using transport strategy: sse-only
+[75943] Connected to remote server using SSEClientTransport
+[75943] Local STDIO server running
+[75943] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75943] Press Ctrl+C to exit
+2025-06-09 18:12:48,505 - __main__ - INFO - Starting MCP session for pip_audit
+[75943] [Local→Remote] initialize
+[75943] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75943] [Remote→Local] 0
+[75943] [Local→Remote] notifications/initialized
+[75943] [Local→Remote] tools/list
+[75943] Error from remote server: SseError: SSE error: undefined
+    at _eventSource.onerror (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12683:23)
+    at EventSource.scheduleReconnect_fn (file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12598:53)
+    at file:///Users/rustem/.npm/_npx/705d23756ff7dacc/node_modules/mcp-remote/dist/chunk-FBGYN3F2.js:12445:223
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  code: undefined,
+  event: {
+    type: 'error',
+    message: undefined,
+    code: undefined,
+    defaultPrevented: false,
+    cancelable: false,
+    timeStamp: 2073.71375
+  }
+}
+2025-06-09 18:13:45,514 - __main__ - ERROR - Connection timeout for pip_audit (attempt 2)
+2025-06-09 18:13:45,514 - __main__ - WARNING - ❌ pip_audit analysis failed (attempt 2): Error: Connection timeout for pip_audit after 2 attempts
+2025-06-09 18:13:45,514 - __main__ - INFO - Starting analysis with circle_test...
+2025-06-09 18:13:46,042 - __main__ - INFO - Running analysis with circle_test (attempt 1/2)
+2025-06-09 18:13:46,042 - __main__ - INFO - 🏥 Checking server for circle_test...
+2025-06-09 18:13:46,051 - __main__ - INFO - ✅ Server check passed for circle_test
+2025-06-09 18:13:46,051 - __main__ - INFO - Attempting to connect to circle_test (attempt 1/2)
+2025-06-09 18:13:46,051 - __main__ - INFO - Server URL: http://localhost:7864/gradio_api/mcp/sse
+[75984] Using transport strategy: sse-only
+[75984] Using automatically selected callback port: 7146
+[75984] [75984] Connecting to remote server: http://localhost:7864/gradio_api/mcp/sse
+[75984] Using transport strategy: sse-only
+[75984] Connected to remote server using SSEClientTransport
+[75984] Local STDIO server running
+[75984] Proxy established successfully between local STDIO and remote SSEClientTransport
+[75984] Press Ctrl+C to exit
+2025-06-09 18:13:49,056 - __main__ - INFO - Starting MCP session for circle_test
+[75984] [Local→Remote] initialize
+[75984] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[75984] [Remote→Local] 0
+[75984] [Local→Remote] notifications/initialized
+[75984] [Local→Remote] tools/list
+[75984] [Remote→Local] 1
+2025-06-09 18:13:49,082 - __main__ - INFO - Waiting for circle_test to fully stabilize...
+2025-06-09 18:13:54,083 - __main__ - INFO - MCP tools initialized successfully for circle_test
+2025-06-09 18:14:22,999 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-09 18:14:24,078 - httpx - INFO - HTTP Request: POST https://api.agno.com/v1/telemetry/agent/run/create "HTTP/1.1 200 OK"
+2025-06-09 18:14:24,100 - __main__ - INFO - ✅ circle_test analysis completed successfully
+2025-06-09 18:14:24,100 - __main__ - INFO - Starting analysis with semgrep...
+2025-06-09 18:14:24,619 - __main__ - INFO - Running analysis with semgrep (attempt 1/2)
+2025-06-09 18:14:24,620 - __main__ - INFO - 🏥 Checking server for semgrep...
+2025-06-09 18:14:24,627 - __main__ - INFO - ✅ Server check passed for semgrep
+2025-06-09 18:14:24,627 - __main__ - INFO - Attempting to connect to semgrep (attempt 1/2)
+2025-06-09 18:14:24,627 - __main__ - INFO - Server URL: http://localhost:7865/gradio_api/mcp/sse
+[76040] Using transport strategy: sse-only
+[76040] Using automatically selected callback port: 14275
+[76040] [76040] Connecting to remote server: http://localhost:7865/gradio_api/mcp/sse
+[76040] Using transport strategy: sse-only
+[76040] Connected to remote server using SSEClientTransport
+[76040] Local STDIO server running
+[76040] Proxy established successfully between local STDIO and remote SSEClientTransport
+[76040] Press Ctrl+C to exit
+2025-06-09 18:14:27,632 - __main__ - INFO - Starting MCP session for semgrep
+[76040] [Local→Remote] initialize
+[76040] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[76040] [Remote→Local] 0
+[76040] [Local→Remote] notifications/initialized
+[76040] [Local→Remote] tools/list
+[76040] [Remote→Local] 1
+2025-06-09 18:14:27,659 - __main__ - INFO - Waiting for semgrep to fully stabilize...
+2025-06-09 18:14:32,660 - __main__ - INFO - MCP tools initialized successfully for semgrep
+2025-06-09 18:15:07,010 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[76040] [Local→Remote] tools/call
+[76040] [Remote→Local] 2
+2025-06-09 18:15:24,635 - __main__ - ERROR - Connection timeout for semgrep (attempt 1)
+2025-06-09 18:15:26,636 - __main__ - INFO - Attempting to connect to semgrep (attempt 2/2)
+2025-06-09 18:15:26,636 - __main__ - INFO - Server URL: http://localhost:7865/gradio_api/mcp/sse
+[76096] Using transport strategy: sse-only
+[76096] Using automatically selected callback port: 14275
+[76096] [76096] Connecting to remote server: http://localhost:7865/gradio_api/mcp/sse
+[76096] Using transport strategy: sse-only
+[76096] Connected to remote server using SSEClientTransport
+[76096] Local STDIO server running
+[76096] Proxy established successfully between local STDIO and remote SSEClientTransport
+[76096] Press Ctrl+C to exit
+2025-06-09 18:15:29,642 - __main__ - INFO - Starting MCP session for semgrep
+[76096] [Local→Remote] initialize
+[76096] {
+  "jsonrpc": "2.0",
+  "id": 0,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "sampling": {},
+      "roots": {
+        "listChanged": true
+      }
+    },
+    "clientInfo": {
+      "name": "mcp (via mcp-remote 0.1.14)",
+      "version": "0.1.0"
+    }
+  }
+}
+[76096] [Remote→Local] 0
+[76096] [Local→Remote] notifications/initialized
+[76096] [Local→Remote] tools/list
+[76096] [Remote→Local] 1
+2025-06-09 18:15:29,670 - __main__ - INFO - Waiting for semgrep to fully stabilize...
+2025-06-09 18:15:34,671 - __main__ - INFO - MCP tools initialized successfully for semgrep
+2025-06-09 18:16:23,218 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.com/v1/chat/completions "HTTP/1.1 200 OK"
+[76096] [Local→Remote] tools/call
+[76096] [Remote→Local] 2
