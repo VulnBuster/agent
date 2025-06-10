@@ -8,13 +8,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "7860:7860"
+    env_file:
+      - .env
     environment:
-      - NEBIUS_API_KEY=${NEBIUS_API_KEY}
-      - MCP_BANDIT_URL=http://mcp-bandit:7860/gradio_api/mcp/sse
-      - MCP_DETECT_SECRETS_URL=http://mcp-detect-secrets:7860/gradio_api/mcp/sse
-      - MCP_PIP_AUDIT_URL=http://mcp-pip-audit:7860/gradio_api/mcp/sse
-      - MCP_CIRCLE_TEST_URL=http://mcp-circle-test:7860/gradio_api/mcp/sse
-      - MCP_SEMGREP_URL=http://mcp-semgrep:7860/gradio_api/mcp/sse
+      - MCP_BANDIT_URL=http://mcp-bandit:7861/gradio_api/mcp/sse
+      - MCP_DETECT_SECRETS_URL=http://mcp-detect-secrets:7862/gradio_api/mcp/sse
+      - MCP_PIP_AUDIT_URL=http://mcp-pip-audit:7863/gradio_api/mcp/sse
+      - MCP_CIRCLE_TEST_URL=http://mcp-circle-test:7864/gradio_api/mcp/sse
+      - MCP_SEMGREP_URL=http://mcp-semgrep:7865/gradio_api/mcp/sse
     depends_on:
       - mcp-bandit
       - mcp-detect-secrets
@@ -65,13 +66,13 @@ services:
       dockerfile: ../Dockerfile
     ports:
       - "7864:7860"
-    environment:
-      - CIRCLE_API_URL=${CIRCLE_API_URL}
+    env_file:
+      - .env
     networks:
       - mcp-network
     restart: unless-stopped
 
-  # Semgrep MCP Server
+# Semgrep MCP Server (временно отключен)
   mcp-semgrep:
     build:
       context: ./mcp/mcp-semgrep
