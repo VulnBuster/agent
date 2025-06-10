@@ -72,7 +72,7 @@ services:
       - mcp-network
     restart: unless-stopped
 
-# Semgrep MCP Server (временно отключен)
+# Semgrep MCP Server
   mcp-semgrep:
     build:
       context: ./mcp/mcp-semgrep
