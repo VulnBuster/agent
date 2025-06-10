@@ -33,11 +33,29 @@ def extract_json_payload(raw: str) -> str:
     """
     Извлекает первый JSON объект {...} из строки, удаляя Markdown-разметку и дополнительный текст.
     """
+    # Убираем блоки <think>
+    raw = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
+    
+    # Убираем markdown блоки
+    raw = re.sub(r"```json\s*", "", raw)
+    raw = re.sub(r"```", "", raw)
+    
     # Ищем первый '{' и последний '}'
     start = raw.find("{")
     end = raw.rfind("}")
+    
     if start != -1 and end != -1 and end > start:
-        return raw[start:end + 1]
+        json_candidate = raw[start:end + 1]
+        
+        # Проверяем валидность JSON перед возвратом
+        try:
+            json.loads(json_candidate)
+            return json_candidate
+        except json.JSONDecodeError:
+            # Если JSON невалидный, возвращаем оригинальную строку
+            logger.warning("Извлеченный JSON невалидный, возвращаем оригинальную строку")
+            return raw
+    
     # Если не нашли JSON, возвращаем оригинальную строку
     return raw
 
@@ -243,11 +261,20 @@ async def run_mcp_agent(message, server_name):
         # Запускаем анализ
         response = await agent.arun(formatted_message)
         logger.info(f"Успешное выполнение для {server_name}")
-        return response.content
+        
+        # Очищаем ответ и извлекаем JSON
+        clean_response = extract_json_payload(response.content)
+        return clean_response
         
     except Exception as e:
         logger.error(f"Ошибка выполнения {server_name}: {str(e)}")
-        return f"Error running {server_name}: {str(e)}"
+        # Возвращаем ошибку в формате JSON для консистентности
+        error_response = {
+            "success": False,
+            "error": f"Error running {server_name}: {str(e)}",
+            "results": {}
+        }
+        return json.dumps(error_response, ensure_ascii=False)
 
 async def run_fix_agent(message):
     """Запускает агента для исправления кода"""
@@ -316,10 +343,39 @@ async def process_file(file_obj, custom_checks, selected_servers):
         }
 
         # Преобразуем raw_outputs в читаемый текст для Markdown
-        markdown_output = "\n\n".join(
-            f"### {name.upper()}:\n```json\n{json.dumps(json.loads(raw)['results'] if 'results' in json.loads(raw) else json.loads(raw), indent=2)}\n```"
-            for name, raw in raw_outputs.items()
-        )
+        formatted_results = []
+        for name, raw in raw_outputs.items():
+            logger.debug(f"Обработка результата для {name}, длина: {len(raw)}")
+            logger.debug(f"Первые 200 символов: {raw[:200]}")
+            
+            try:
+                # Пытаемся распарсить JSON
+                parsed_data = json.loads(raw)
+                logger.debug(f"JSON успешно распарсен для {name}")
+                
+                # Извлекаем результаты если они есть
+                if isinstance(parsed_data, dict) and 'results' in parsed_data:
+                    display_data = parsed_data['results']
+                    logger.debug(f"Извлечены results для {name}")
+                else:
+                    display_data = parsed_data
+                    logger.debug(f"Используются сырые данные для {name}")
+                
+                # Форматируем для отображения
+                formatted_json = json.dumps(display_data, indent=2, ensure_ascii=False)
+                formatted_results.append(f"### {name.upper()}:\n```json\n{formatted_json}\n```")
+                
+            except json.JSONDecodeError as e:
+                # Если JSON некорректный, показываем как есть
+                logger.warning(f"Не удалось распарсить JSON для {name}: {str(e)}")
+                logger.debug(f"Проблемный контент для {name}: {raw}")
+                formatted_results.append(f"### {name.upper()} (Raw output):\n```\n{raw}\n```")
+            except Exception as e:
+                # Любые другие ошибки
+                logger.error(f"Ошибка обработки результата для {name}: {str(e)}")
+                formatted_results.append(f"### {name.upper()} (Error):\n```\nОшибка обработки: {str(e)}\n```")
+        
+        markdown_output = "\n\n".join(formatted_results)
 
         # Читаем оригинальный код
         with open(file_path, 'r', encoding='utf-8') as f_in:
